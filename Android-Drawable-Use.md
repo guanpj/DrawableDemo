@@ -281,10 +281,12 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:background="@drawable/gradient_drawable"
-            android:id="@+id/textView" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"                                           app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
