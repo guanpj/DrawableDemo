@@ -84,8 +84,6 @@ BitmapDrawable 使用 xml 的使用方法如下：
 
 ## 2. ShapeDrawable 和 GradientDrawable
 
-### 2.1 语法
-
 官方文档中对 [ShapeDrawable](<https://developer.android.com/reference/android/graphics/drawable/ShapeDrawable.html?hl=zh-CN>) 的定义是这样的：
 
 > A Drawable object that draws primitive shapes. A ShapeDrawable takes a `Shape` object and manages its presence on the screen.  If no Shape is given, then the ShapeDrawable will default to a `RectShape`.
@@ -101,6 +99,8 @@ BitmapDrawable 使用 xml 的使用方法如下：
 > It can be defined in an XML file with the `<shape>` element. For more information, see the guide to [Drawable Resources](https://developer.android.com/guide/topics/resources/drawable-resource.html?hl=zh-CN).
 
 根据描述可知，它是一个具有色彩梯度（color gradient）的 Drawable。
+
+### 2.1 语法
 
 GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 ShapeDrawable 最大的不同的就是它拥有 *gradient* 属性，下面以 GradientDrawable 为例，讲解 *shape* 标签的用法，它的语法如下：
 
@@ -292,5 +292,14 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 **效果图：**
 
+## 3. LayerDrawable
 
+### 3.1 语法
 
+### 3.2 用法示例
+
+**定义：**
+
+**使用：**
+
+**效果图：**

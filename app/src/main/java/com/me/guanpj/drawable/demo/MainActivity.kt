@@ -17,5 +17,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_gradient_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, GradientDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_layer_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, LayerDrawableActivity::class.java))
+        }
     }
 }
