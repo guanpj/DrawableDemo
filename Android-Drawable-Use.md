@@ -6,7 +6,7 @@ BitmapDrawable 可以看作是对 Bitmap 的一种包装，它可以设定 Bitma
 
 ### 1.1 语法
 
-BitmapDrawable 使用 xml 的使用方法如下：
+BitmapDrawable 对应 **\<bitmap\>** 标签定义，xml 语法如下：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -36,6 +36,8 @@ BitmapDrawable 使用 xml 的使用方法如下：
 | tileMode  | 平铺模式。默认：disable；clamp：复制边沿的颜色；repeat：水平和垂直方向重复绘制图片；mirror：水平和垂直方向交替镜像进行重复绘制 |
 
 ### 1.2 用法示例
+
+下面以定义一个使用图片作为背景的 Drawable 为例，展示 BitmapDrawable 的简单实用方法。
 
 **定义：**
 
@@ -80,7 +82,7 @@ BitmapDrawable 使用 xml 的使用方法如下：
 
  **效果图：**
 
-![demo-bitmap-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/bitmap-drawable.jpg)
+![bitmap-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/bitmap-drawable.jpg)
 
 ## 2. ShapeDrawable 和 GradientDrawable
 
@@ -143,7 +145,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 </shape>
 ```
 
-其中各个属性的含义分别是：
+其中各个属性标签的含义分别是：
 
 **android:shape 属性：** 表示形状，它的值可以是 rectangle（矩形）、oval（椭圆）、line（横线）和 ring（圆环），默认为 rectangle。 此外，当形状值是 *ring* 的时候，还有一下几个属性可配置：
 
@@ -219,9 +221,12 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 |   android:color   |      边框颜色      |
 | android:dashWidth |   虚线的线段宽度   |
 |  android:dashGap  | 虚线之间的空白间隔 |
+
 需要注意的是，如果需要设置边框虚线效果，则需要同时设置 dashWidth 和 dashGap 的值不为 0，否则无法显示虚线效果。
 
 ### 2.2 用法示例
+
+下面以定义一个圆角并带有其他效果的 Drawable 为例，展示 GradientDrawable 的简单用法。
 
 **定义：**
 
@@ -256,7 +261,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
     <stroke
             android:width="2dp"
-            android:color="#ffffff"
+            android:color="#000000"
             android:dashWidth="7dp"
             android:dashGap="3dp" />
 
@@ -292,9 +297,37 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 **效果图：**
 
-## 3. LayerDrawable
+![gradient-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/gradient-drawable.jpg)
+
+## 3. StateListDrawable
+
+StateListDrawable 可以根据对象的状态并使用不同的 Drawable 对象来表示同一个图形。如可以根据 Button 的状态（按下、获取焦点等）来显示不同的 Drawable 从而实现点击的效果。
 
 ### 3.1 语法
+
+定义 StateListDrawable 的语法格式如下：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:constantSize=["true" | "false"]
+    android:dither=["true" | "false"]
+    android:variablePadding=["true" | "false"] >
+    <item
+        android:drawable="@[package:]drawable/drawable_resource"
+        android:state_pressed=["true" | "false"]
+        android:state_focused=["true" | "false"]
+        android:state_hovered=["true" | "false"]
+        android:state_selected=["true" | "false"]
+        android:state_checkable=["true" | "false"]
+        android:state_checked=["true" | "false"]
+        android:state_enabled=["true" | "false"]
+        android:state_activated=["true" | "false"]
+        android:state_window_focused=["true" | "false"] />
+</selector>
+```
+
+
 
 ### 3.2 用法示例
 
@@ -303,3 +336,113 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 **使用：**
 
 **效果图：**
+
+## 3. LayerDrawable
+
+LayerDrawable 是管理其他 Drawable 阵列的 Drawable。列表中的每个 item 按照列表的顺序绘制，列表中的最后 item 绘于顶部。
+
+### 3.1 语法
+
+定义 LayerDrawable 的语法格式如下：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@[package:]drawable/drawable_resource"
+        android:id="@[+][package:]id/resource_name"
+        android:top="dimension"
+        android:right="dimension"
+        android:bottom="dimension"
+        android:left="dimension" />
+</layer-list>
+```
+
+LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<item\>** 标签，每个 item 表示一个 Drawable，item 的属性含义分别是：
+
+|                           属性                           |                             含义                             |
+| :------------------------------------------------------: | :----------------------------------------------------------: |
+|                     android:drawable                     |            drawable 资源，可引用现有的的 Drawable            |
+|                        android:id                        | iitem 的 id，使用"@+id/*name*"的形式表示。可通过 View.findViewById() 或者 Activity.findViewById() 方法查找到这个 Drawable |
+| android:top、android:right、android:bottom、android:left |           Drawable 相对于 View 在各个方向的偏移量            |
+
+### 3.2 用法示例
+
+下面以定义一个圆角并带阴影效果的 Drawable 为例，展示 LayerDrawable 的简单使用。
+
+**定义：**
+
+[app/src/main/res/drawable/layer_drawable](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/drawable/layer_drawable.xml)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:left="2dp"
+            android:top="4dp">
+        <shape>
+            <solid android:color="@android:color/darker_gray" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <item
+            android:bottom="4dp"
+            android:right="2dp">
+        <shape>
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>
+```
+
+**使用：**
+
+[app/src/main/res/layout/activity_layer_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_layer_drawable.xml)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_dark"
+    tools:context=".LayerDrawableActivity">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/layer_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            tools:layout_editor_absoluteY="331dp"
+            tools:layout_editor_absoluteX="190dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#000000"
+                  android:text="I'm a title......."
+                  android:textSize="20sp" />
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="@android:color/darker_gray"
+                  android:text="content content content content content content content content..."
+                  android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+**效果图：**
+
+![gradient-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/layer-drawable.jpg)

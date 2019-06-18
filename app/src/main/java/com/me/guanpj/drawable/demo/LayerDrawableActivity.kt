@@ -1,4 +1,11 @@
 package com.me.guanpj.drawable.demo
 
-class LayerDrawableActivity {
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class LayerDrawableActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_layer_drawable)
+    }
 }

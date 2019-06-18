@@ -7,6 +7,6 @@ class GradientDrawableActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bitmap_drawable)
+        setContentView(R.layout.activity_gradient_drawable)
     }
 }
