@@ -39,8 +39,7 @@ BitmapDrawable 使用 xml 的使用方法如下：
 
 **定义：**
 
-[app/src/main/res/drawable/bitmap_drawable.xml]([https://github.com/guanpj/DrawableDemo/blob/cf8300c5a241ddee02ed394d39c6aab08860199f/app/src/main/res/drawable/bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/cf8300c5a241ddee02ed394d39c6aab08860199f/app/src/main/res/drawable/bitmap_drawable.xml)
-)
+[app/src/main/res/drawable/bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/drawable/bitmap_drawable.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -55,8 +54,7 @@ BitmapDrawable 使用 xml 的使用方法如下：
 
 **使用：**
 
-[/app/src/main/res/layout/activity_main.xml]([https://github.com/guanpj/DrawableDemo/blob/cf8300c5a241ddee02ed394d39c6aab08860199f/app/src/main/res/layo](https://github.com/guanpj/DrawableDemo/blob/cf8300c5a241ddee02ed394d39c6aab08860199f/app/src/main/res/layo)
-)
+[/app/src/main/res/layout/activity_bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_bitmap_drawable.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
