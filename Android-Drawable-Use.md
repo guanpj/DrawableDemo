@@ -54,7 +54,7 @@ BitmapDrawable 使用 xml 的使用方法如下：
 
 **使用：**
 
-[/app/src/main/res/layout/activity_bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_bitmap_drawable.xml)
+[app/src/main/res/layout/activity_bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_bitmap_drawable.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -225,7 +225,68 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 **定义：**
 
+[app/src/main/res/drawable/gradient_drawable](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/drawable/gradient_drawable.xml)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+
+    <corners
+            android:topLeftRadius="15dp"
+            android:topRightRadius="15dp"
+            android:bottomLeftRadius="15dp"
+            android:bottomRightRadius="15dp"/>
+
+    <padding
+            android:left="10dp"
+            android:top="10dp"
+            android:right="10dp"
+            android:bottom="10dp" />
+
+    <gradient android:angle="45"
+              android:type="linear"
+              android:startColor="#ff0000"
+              android:centerColor="#00ff00"
+              android:endColor="#0000ff" />
+
+    <size
+        android:width="200dp"
+        android:height="100dp" />
+
+    <stroke
+            android:width="2dp"
+            android:color="#ffffff"
+            android:dashWidth="7dp"
+            android:dashGap="3dp" />
+
+</shape>
+```
+
 **使用：**
+
+[app/src/main/res/layout/activity_gradient_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_gradient_drawable.xml)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GradientDrawableActivity">
+
+    <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/gradient_drawable"
+            android:id="@+id/textView" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"                                           app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
 
 **效果图：**
 
