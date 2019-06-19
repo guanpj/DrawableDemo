@@ -33,5 +33,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_inset_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, InsetDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_scale_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, ScaleDrawableActivity::class.java))
+        }
     }
 }
