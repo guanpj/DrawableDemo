@@ -25,5 +25,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_state_list_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, StateListDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_level_list_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, LevelListDrawableActivity::class.java))
+        }
     }
 }

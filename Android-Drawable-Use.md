@@ -147,7 +147,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 其中各个属性标签的含义分别是：
 
-**android:shape 属性：** 表示形状，它的值可以是 rectangle（矩形）、oval（椭圆）、line（横线）和 ring（圆环），默认为 rectangle。 此外，当形状值是 *ring* 的时候，还有一下几个属性可配置：
+**android:shape：** 表示形状，它的值可以是 rectangle（矩形）、oval（椭圆）、line（横线）和 ring（圆环），默认为 rectangle。 此外，当形状值是 *ring* 的时候，还有一下几个属性可配置：
 
 |           属性           |                             含义                             |
 | :----------------------: | :----------------------------------------------------------: |
@@ -157,7 +157,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 |  android:thicknessRatio  |                   圆环的厚度占环宽度的比率                   |
 |     android:useLevel     | 一般为 false，否则可能达不到预期显示效果，除非把它当作 LevelListDrawable 来使用 |
 
-**\<corners\> 标签：**
+**\<corners\>：**
 
 ```xml
 <corners
@@ -170,7 +170,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 指图形的圆角半径，**仅当 shape 属性为 rectangle 即形状是矩形时生效**，数值越小越接近直角，*android:radius* 同时设置四个角的半径，其他四个属性则可单独设置某个角的半径。
 
-**\<gradient\> 标签：** 
+**\<gradient\>：** 
 
 ```xml
 <gradient
@@ -199,19 +199,19 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 |    android:useLevel    | 一般为 false，否则可能达不到预期显示效果，除非把它当作 LevelListDrawable 来使用 |
 |      android:type      | 渐变类别。它的值可以为：linear(线性)，默认值、radial（径内渐变）和sweep（扫描渐变） |
 
-**\<padding\> 标签：**
+**\<padding\>：**
 
 距离内容或者子元素的内边距，每个方向可以单独设置。
 
-**\<size\> 标签：**
+**\<size\>：**
 
 设置 shape 大小，width 表示宽度，height 表示高度。需要注意的是，这个一般并不是 shape 的最终大小，如果用作 View 的背景，它的大小是由 View 的大小来决定的。
 
-**\<solid\> 标签：**
+**\<solid\>：**
 
 表示纯色填充，color 属性为填充的颜色。
 
-**\<stroke\> 标签：**
+**\<stroke\>：**
 
 边框描述，它的各个属性值的含义分别是：
 
@@ -237,28 +237,33 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
 
+    <!--圆角半径-->
     <corners
             android:topLeftRadius="15dp"
             android:topRightRadius="15dp"
             android:bottomLeftRadius="15dp"
             android:bottomRightRadius="15dp"/>
 
+    <!--内边距-->
     <padding
             android:left="10dp"
             android:top="10dp"
             android:right="10dp"
             android:bottom="10dp" />
 
+    <!--渐变效果-->
     <gradient android:angle="45"
               android:type="linear"
               android:startColor="#ff0000"
               android:centerColor="#00ff00"
               android:endColor="#0000ff" />
 
+    <!--预设大小-->
     <size
         android:width="200dp"
         android:height="100dp" />
 
+    <!--边框样式-->
     <stroke
             android:width="2dp"
             android:color="#000000"
@@ -301,7 +306,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 ## 3. StateListDrawable
 
-StateListDrawable 可以根据对象的状态并使用不同的 Drawable 对象来表示同一个图形。如可以根据 Button 的状态（按下、获取焦点等）来显示不同的 Drawable 从而实现点击的效果。
+StateListDrawable 可以根据对象的状态并使用不同的 item(Drawable) 对象来表示同一个图形。如可以根据 Button 的状态（按下、获取焦点等）来显示不同的 Drawable 从而实现点击的效果。
 
 ### 3.1 语法
 
@@ -327,21 +332,96 @@ StateListDrawable 可以根据对象的状态并使用不同的 Drawable 对象�
 </selector>
 ```
 
+StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义分别是：
 
+**android:constantSize：**
+
+由于 StateListDrawable 会根据不同的状态来显示不同的 Drawable，而每个 Drawable 的大小不一定相同，因此当 constantSize 属性的值为 true 时表示固定大小（值为所有 Drawable 固有大小的最大值），值为 false 时则大小为当前状态下对应的 Drawable 的大小。默认值为 false。
+
+**android:variablePadding ：** 
+
+表示 StateListDrawable 的 padding 值是否随状态的改变而改变，默认为 false。
+
+**android:dither：** 
+
+是否开启抖动效果，默认为 true，建议开启。
+
+**\<item\>：**
+
+每个 item 表示一个 Drawable，item 的属性含义分别是：
+
+|             属性             |                   含义                   |
+| :--------------------------: | :--------------------------------------: |
+|       android:drawable       |  drawable 资源，可引用现有的的 Drawable  |
+|    android:state_pressed     |            是否处于被按下状态            |
+|    android:state_focused     |            是否已得到焦点状态            |
+|    android:state_hovered     | 光标是否停留在View的自身大小范围内的状态 |
+|    android:state_selected    |            是否处于被选中状态            |
+|   android:state_checkable    |            是否处于可勾选状态            |
+|    android:state_checked     |            是否处于已勾选状态            |
+|    android:state_enabled     |             是否处于可用状态             |
+|     android:state_active     |             是否处于激活状态             |
+| android:state_window_focused |          是否窗口已得到焦点状态          |
 
 ### 3.2 用法示例
 
+下面以定制一个具有点击效果 Button 的背景为例，展示 StateListDrawable 的用法。
+
 **定义：**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--获取焦点状态-->
+    <item
+            android:state_focused="true"
+            android:drawable="@drawable/shape_dark" />
+
+    <!--按下状态-->
+    <item
+            android:state_pressed="true"
+            android:drawable="@drawable/shape_dark"/>
+
+    <!--默认状态-->
+    <item
+            android:drawable="@drawable/shape_light"/>
+</selector>
+```
 
 **使用：**
 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_dark"
+    tools:context=".LayerDrawableActivity">
+
+    <Button
+            android:text="Button"
+            android:background="@drawable/drawable_state_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
 **效果图：**
 
-## 3. LayerDrawable
+![state-list-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/state-list-drawable.gif)
 
-LayerDrawable 是管理其他 Drawable 阵列的 Drawable。列表中的每个 item 按照列表的顺序绘制，列表中的最后 item 绘于顶部。
+## 4. LayerDrawable
 
-### 3.1 语法
+LayerDrawable 是管理 Drawable 列表的 Drawable。列表中的每个 item 按照列表的顺序绘制，列表中的最后 item 绘于顶部。
+
+### 4.1 语法
 
 定义 LayerDrawable 的语法格式如下：
 
@@ -367,7 +447,7 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 |                        android:id                        | iitem 的 id，使用"@+id/*name*"的形式表示。可通过 View.findViewById() 或者 Activity.findViewById() 方法查找到这个 Drawable |
 | android:top、android:right、android:bottom、android:left |           Drawable 相对于 View 在各个方向的偏移量            |
 
-### 3.2 用法示例
+### 4.2 用法示例
 
 下面以定义一个圆角并带阴影效果的 Drawable 为例，展示 LayerDrawable 的简单使用。
 
@@ -378,6 +458,7 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--内部定义一个 Drawable-->
     <item
             android:left="2dp"
             android:top="4dp">
@@ -387,13 +468,11 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
         </shape>
     </item>
 
+    <!--指定现有的 Drawable-->
     <item
             android:bottom="4dp"
-            android:right="2dp">
-        <shape>
-            <solid android:color="#FFFFFF" />
-            <corners android:radius="10dp" />
-        </shape>
+            android:right="2dp"
+            android:drawable="@drawable/shape_light">
     </item>
 </layer-list>
 ```
@@ -446,3 +525,59 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 **效果图：**
 
 ![gradient-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/layer-drawable.jpg)
+
+## 5. LevelListDrawable
+
+### 5.1 语法
+
+LevelListDrawable 同样表示一个 Drawable 列表，列表中的每个 item 都有一个 level 值， LevelListDrawable 会根据不同的 level 在不同的 item 之间进行切换。
+
+### 5.2 用法示例
+
+**定义：**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<level-list
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@drawable/drawable_resource"
+        android:maxLevel="integer"
+        android:minLevel="integer" />
+</level-list>
+```
+
+LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<item\>** 标签，每个 item 表示一个 Drawable，item 的属性含义分别是：
+
+|       属性       |                     含义                     |
+| :--------------: | :------------------------------------------: |
+| android:drawable |    drawable 资源，可引用现有的的 Drawable    |
+| android:maxLevel | 该 item 允许的最大级别，取值范围为[0, 10000] |
+| android:minLevel | 该 item 允许的最小级别，取值范围为[0, 10000] |
+
+**使用：**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/image4"
+        android:maxLevel="0"
+        />
+
+    <item android:drawable="@drawable/image1"
+          android:maxLevel="1"
+        />
+
+    <item android:drawable="@drawable/image2"
+        android:maxLevel="2"
+        />
+
+    <item android:drawable="@drawable/image3"
+        android:maxLevel="3"
+        />
+</level-list>
+```
+
+**效果图：**
+
+![level-list-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/level-list-drawable.gif)

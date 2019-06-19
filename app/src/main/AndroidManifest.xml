@@ -20,12 +20,10 @@
         </activity>
 
         <activity android:name=".BitmapDrawableActivity" />
-
         <activity android:name=".GradientDrawableActivity" />
-
         <activity android:name=".LayerDrawableActivity" />
-
         <activity android:name=".StateListDrawableActivity" />
+        <activity android:name=".LevelListDrawableActivity"/>
 
     </application>
 
