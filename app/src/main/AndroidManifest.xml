@@ -23,6 +23,10 @@
 
         <activity android:name=".GradientDrawableActivity" />
 
+        <activity android:name=".LayerDrawableActivity" />
+
+        <activity android:name=".StateListDrawableActivity" />
+
     </application>
 
 </manifest>

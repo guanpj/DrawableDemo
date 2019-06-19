@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GradientDrawableActivity">
+    android:background="@android:color/holo_orange_dark"
+    tools:context=".LayerDrawableActivity">
 
     <Button
             android:text="Button"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:background="@drawable/drawable_gradient"
-            android:id="@+id/textView"
+            android:background="@drawable/drawable_state_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

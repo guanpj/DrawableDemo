@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--内部定义一个 Drawable-->
     <item
             android:left="2dp"
             android:top="4dp">
@@ -9,12 +10,10 @@
         </shape>
     </item>
 
+    <!--指定现有的 Drawable-->
     <item
             android:bottom="4dp"
-            android:right="2dp">
-        <shape>
-            <solid android:color="#FFFFFF" />
-            <corners android:radius="10dp" />
-        </shape>
+            android:right="2dp"
+            android:drawable="@drawable/shape_light">
     </item>
 </layer-list>
