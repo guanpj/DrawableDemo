@@ -41,8 +41,6 @@ BitmapDrawable 对应 **\<bitmap\>** 标签定义，xml 语法如下：
 
 **定义：**
 
-[app/src/main/res/drawable/bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/drawable/bitmap_drawable.xml)
-
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,8 +53,6 @@ BitmapDrawable 对应 **\<bitmap\>** 标签定义，xml 语法如下：
 ```
 
 **使用：**
-
-[app/src/main/res/layout/activity_bitmap_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_bitmap_drawable.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -230,8 +226,6 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 **定义：**
 
-[app/src/main/res/drawable/gradient_drawable](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/drawable/gradient_drawable.xml)
-
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
@@ -274,8 +268,6 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 ```
 
 **使用：**
-
-[app/src/main/res/layout/activity_gradient_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_gradient_drawable.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -453,8 +445,6 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 
 **定义：**
 
-[app/src/main/res/drawable/layer_drawable](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/drawable/layer_drawable.xml)
-
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
@@ -478,8 +468,6 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 ```
 
 **使用：**
-
-[app/src/main/res/layout/activity_layer_drawable.xml](https://github.com/guanpj/DrawableDemo/blob/master/app/src/main/res/layout/activity_layer_drawable.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -665,8 +653,102 @@ class LevelListDrawableActivity : AppCompatActivity() {
 
 **定义：**
 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+       android:drawable="@drawable/shape_dark"
+       android:insetBottom="10dp"
+       android:insetTop="10dp"
+       android:insetLeft="10dp"
+       android:insetRight="10dp" />
+```
+
 **使用：**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/drawable_inset">
+
+    <TextView
+            android:textSize="20sp"
+            android:text="TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
 
 **效果图：**
 
 ![inset-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/inset-drawable.jpg)
+
+## 7. ScaleDrawable
+
+ScaleDrawable 可以根据 level 值动态地将 Drawable 进行一定比例的缩放。
+
+### 7.1 语法
+
+定义 ScaleDrawable  的语法如下：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<scale
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/drawable_resource"
+    android:scaleGravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
+                          "fill_vertical" | "center_horizontal" | "fill_horizontal" |
+                          "center" | "fill" | "clip_vertical" | "clip_horizontal"]
+    android:scaleHeight="percentage"
+    android:scaleWidth="percentage" />
+```
+
+它的根标签为 **\<scale\>**，它的各个属性的含义分别是：
+
+**android:drawable：**
+
+drawable 资源，可引用现有的的 Drawable
+
+**android:scaleGravity：** 
+
+当图片尺寸小于 View 时，设置这个属性值可以对图片进行定位，可以使用 ”**|**“ 符号组合使用，所有值的含义分别为：
+
+|        值         |                             说明                             |
+| :---------------: | :----------------------------------------------------------: |
+|        top        |             将对象放在其容器顶部，不改变其大小。             |
+|      bottom       |             将对象放在其容器底部，不改变其大小。             |
+|       left        |      将对象放在其容器左边缘，不改变其大小。这是默认值。      |
+|       right       |            将对象放在其容器右边缘，不改变其大小。            |
+|  center_vertical  |          将对象放在其容器的垂直中心，不改变其大小。          |
+|   fill_vertical   |        按需要扩展对象的垂直大小，使其完全适应其容器。        |
+| center_horizontal |          将对象放在其容器的水平中心，不改变其大小。          |
+|  fill_horizontal  |        按需要扩展对象的水平大小，使其完全适应其容器。        |
+|      center       |      将对象放在其容器的水平和垂直轴中心，不改变其大小。      |
+|       fill        |        按需要扩展对象的垂直大小，使其完全适应其容器。        |
+|   clip_vertical   | 可设置为让子元素的上边缘和/或下边缘裁剪至其容器边界的附加选项。裁剪基于垂直重力：顶部重力裁剪上边缘，底部重力裁剪下边缘，任一重力不会同时裁剪两边。 |
+|  clip_horizontal  | 可设置为让子元素的左边和/或右边裁剪至其容器边界的附加选项。裁剪基于水平重力：左边重力裁剪右边缘，右边重力裁剪左边缘，任一重力不会同时裁剪两边。 |
+
+**android:scaleHeight：**
+
+Drawable 高的缩放比例，值越高最终结果越小。
+
+**android:scaleWidth：**
+
+Drawable 宽的缩放比例
+
+### 7.2 用法示例
+
+
+
+**定义：**
+
+**使用：**
+
+**效果图：**
