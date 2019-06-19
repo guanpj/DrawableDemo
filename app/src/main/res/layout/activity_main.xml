@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_bitmap_drawable" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="68dp" />
+            android:layout_marginTop="15dp" app:layout_constraintHorizontal_bias="0.498"/>
     <Button
             android:text="GradientDrawable"
             android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
             android:id="@+id/btn_gradient_drawable" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_bitmap_drawable"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="15dp" />
 
     <Button
             android:text="LayerDrawable"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_layer_drawable" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_gradient_drawable"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="15dp" />
 
     <Button
             android:text="StateListDrawable"
@@ -35,20 +35,30 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_state_list_drawable" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_layer_drawable"
-            android:layout_marginTop="36dp" />
+            android:layout_marginTop="15dp" />
+
     <Button
             android:text="LevelListDrawable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_level_list_drawable" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_state_list_drawable"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="15dp" />
+
+    <Button
+            android:text="InsetDrawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_inset_drawable" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_level_list_drawable"
+            android:layout_marginTop="15dp" />
+
     <Button
             android:text="StateListDrawable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_level_list_drawable" android:layout_marginTop="44dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_inset_drawable" android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

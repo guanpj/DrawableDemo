@@ -528,13 +528,11 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 
 ## 5. LevelListDrawable
 
-### 5.1 语法
-
 LevelListDrawable 同样表示一个 Drawable 列表，列表中的每个 item 都有一个 level 值， LevelListDrawable 会根据不同的 level 在不同的 item 之间进行切换。
 
-### 5.2 用法示例
+### 5.1 语法
 
-**定义：**
+定义 LevelListDrawable 的语法格式如下：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -547,7 +545,7 @@ LevelListDrawable 同样表示一个 Drawable 列表，列表中的每个 item �
 </level-list>
 ```
 
-LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<item\>** 标签，每个 item 表示一个 Drawable，item 的属性含义分别是：
+LayerDrawable 根标签为 **\<layer-list\>**，它可以包含多个 **\<item\>** 标签，每个 item 表示一个 Drawable，item 的属性含义分别是：
 
 |       属性       |                     含义                     |
 | :--------------: | :------------------------------------------: |
@@ -555,29 +553,120 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 | android:maxLevel | 该 item 允许的最大级别，取值范围为[0, 10000] |
 | android:minLevel | 该 item 允许的最小级别，取值范围为[0, 10000] |
 
-**使用：**
+### 5.2 用法示例
+
+**定义：**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <level-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/image4"
-        android:maxLevel="0"
-        />
+    <item
+            android:drawable="@drawable/kakarotto1"
+            android:maxLevel="0" />
 
-    <item android:drawable="@drawable/image1"
-          android:maxLevel="1"
-        />
+    <item
+            android:drawable="@drawable/kakarotto2"
+            android:maxLevel="1" />
 
-    <item android:drawable="@drawable/image2"
-        android:maxLevel="2"
-        />
+    <item
+            android:drawable="@drawable/kakarotto3"
+            android:maxLevel="2" />
 
-    <item android:drawable="@drawable/image3"
-        android:maxLevel="3"
-        />
+    <item
+            android:drawable="@drawable/kakarotto4"
+            android:maxLevel="3" />
+
+    <item
+            android:drawable="@drawable/kakarotto5"
+            android:maxLevel="4" />
 </level-list>
 ```
+
+**使用：**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GradientDrawableActivity">
+
+    <ImageView
+            android:text="Button"
+            android:layout_width="230dp"
+            android:layout_height="150dp"
+            android:src="@drawable/drawable_level_list"
+            android:id="@+id/img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+然后控制 ImageView 的 level 即可显示出效果：
+
+```kotlin
+class LevelListDrawableActivity : AppCompatActivity() {
+    lateinit var mImageView: ImageView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_level_list_drawable)
+
+        mImageView = findViewById(R.id.img)
+        for (i in 0..15) {
+            mHandler.sendEmptyMessageDelayed(i, (1000 * i).toLong())
+        }
+    }
+
+    var mHandler: Handler = object: Handler() {
+        override fun handleMessage(msg: Message?) {
+            msg?.what?.let { mImageView.setImageLevel(it%5) }
+        }
+    }
+}
+```
+
+
 
 **效果图：**
 
 ![level-list-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/level-list-drawable.gif)
+
+## 6. InsetDrawable
+
+在有些场景下，我们可能需要设置一个全屏的背景图片，但又想让背景图片跟边框留出一些间隙，这时使用 InsetDrawable 就能很好地解决问题了。
+
+### 6.1 语法
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<inset
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/drawable_resource"
+    android:insetTop="dimension"
+    android:insetRight="dimension"
+    android:insetBottom="dimension"
+    android:insetLeft="dimension" />
+```
+
+根标签为 **\<inset\>**，它的各个属性含义分别是：
+
+|                             属性                             |                  含义                  |
+| :----------------------------------------------------------: | :------------------------------------: |
+|                       android:drawable                       | drawable 资源，可引用现有的的 Drawable |
+| android:insetTop、android:insetRight、android:insetBottom、android:insetLeft |         内容距离各个边框的距离         |
+
+### 6.2 用法示例
+
+**定义：**
+
+**使用：**
+
+**效果图：**
+
+![inset-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/inset-drawable.jpg)
