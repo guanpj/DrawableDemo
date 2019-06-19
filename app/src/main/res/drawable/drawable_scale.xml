@@ -3,4 +3,4 @@
        android:drawable="@drawable/kakarotto"
        android:scaleHeight="70%"
        android:scaleWidth="70%"
-       android:scaleGravity="left|top" />
+       android:scaleGravity="center" />
