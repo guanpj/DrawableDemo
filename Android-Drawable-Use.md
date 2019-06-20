@@ -39,7 +39,7 @@ BitmapDrawable 对应 **\<bitmap\>** 标签定义，xml 语法如下：
 
 下面以定义一个使用图片作为背景的 Drawable 为例，展示 BitmapDrawable 的简单实用方法。
 
-**定义：**
+**定义**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -52,7 +52,7 @@ BitmapDrawable 对应 **\<bitmap\>** 标签定义，xml 语法如下：
     android:tileMode="repeat"/>
 ```
 
-**使用：**
+**使用**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -76,7 +76,7 @@ BitmapDrawable 对应 **\<bitmap\>** 标签定义，xml 语法如下：
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
- **效果图：**
+ **效果图**
 
 ![bitmap-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/bitmap-drawable.jpg)
 
@@ -143,7 +143,9 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 其中各个属性标签的含义分别是：
 
-**android:shape：** 表示形状，它的值可以是 rectangle（矩形）、oval（椭圆）、line（横线）和 ring（圆环），默认为 rectangle。 此外，当形状值是 *ring* 的时候，还有一下几个属性可配置：
+**android:shape** 
+
+表示形状，它的值可以是 rectangle（矩形）、oval（椭圆）、line（横线）和 ring（圆环），默认为 rectangle。 此外，当形状值是 *ring* 的时候，还有一下几个属性可配置：
 
 |           属性           |                             含义                             |
 | :----------------------: | :----------------------------------------------------------: |
@@ -153,7 +155,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 |  android:thicknessRatio  |                   圆环的厚度占环宽度的比率                   |
 |     android:useLevel     | 一般为 false，否则可能达不到预期显示效果，除非把它当作 LevelListDrawable 来使用 |
 
-**\<corners\>：**
+**\<corners\>**
 
 ```xml
 <corners
@@ -166,7 +168,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 指图形的圆角半径，**仅当 shape 属性为 rectangle 即形状是矩形时生效**，数值越小越接近直角，*android:radius* 同时设置四个角的半径，其他四个属性则可单独设置某个角的半径。
 
-**\<gradient\>：** 
+**\<gradient\>** 
 
 ```xml
 <gradient
@@ -195,19 +197,19 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 |    android:useLevel    | 一般为 false，否则可能达不到预期显示效果，除非把它当作 LevelListDrawable 来使用 |
 |      android:type      | 渐变类别。它的值可以为：linear(线性)，默认值、radial（径内渐变）和sweep（扫描渐变） |
 
-**\<padding\>：**
+**\<padding\>**
 
 距离内容或者子元素的内边距，每个方向可以单独设置。
 
-**\<size\>：**
+**\<size\>**
 
 设置 shape 大小，width 表示宽度，height 表示高度。需要注意的是，这个一般并不是 shape 的最终大小，如果用作 View 的背景，它的大小是由 View 的大小来决定的。
 
-**\<solid\>：**
+**\<solid\>**
 
 表示纯色填充，color 属性为填充的颜色。
 
-**\<stroke\>：**
+**\<stroke\>**
 
 边框描述，它的各个属性值的含义分别是：
 
@@ -224,7 +226,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 
 下面以定义一个圆角并带有其他效果的 Drawable 为例，展示 GradientDrawable 的简单用法。
 
-**定义：**
+**定义**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -267,7 +269,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 </shape>
 ```
 
-**使用：**
+**使用**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -292,7 +294,7 @@ GradientDrawable 和 ShapeDrawable 都采用 *shape*  标签来定义，和 Shap
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-**效果图：**
+**效果图**
 
 ![gradient-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/gradient-drawable.jpg)
 
@@ -326,19 +328,19 @@ StateListDrawable 可以根据对象的状态并使用不同的 item(Drawable) �
 
 StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义分别是：
 
-**android:constantSize：**
+**android:constantSize**
 
 由于 StateListDrawable 会根据不同的状态来显示不同的 Drawable，而每个 Drawable 的大小不一定相同，因此当 constantSize 属性的值为 true 时表示固定大小（值为所有 Drawable 固有大小的最大值），值为 false 时则大小为当前状态下对应的 Drawable 的大小。默认值为 false。
 
-**android:variablePadding ：** 
+**android:variablePadding** 
 
 表示 StateListDrawable 的 padding 值是否随状态的改变而改变，默认为 false。
 
-**android:dither：** 
+**android:dither** 
 
 是否开启抖动效果，默认为 true，建议开启。
 
-**\<item\>：**
+**\<item\>**
 
 每个 item 表示一个 Drawable，item 的属性含义分别是：
 
@@ -359,7 +361,7 @@ StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义
 
 下面以定制一个具有点击效果 Button 的背景为例，展示 StateListDrawable 的用法。
 
-**定义：**
+**定义**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -380,7 +382,7 @@ StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义
 </selector>
 ```
 
-**使用：**
+**使用**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -405,7 +407,7 @@ StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-**效果图：**
+**效果图**
 
 ![state-list-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/state-list-drawable.gif)
 
@@ -443,7 +445,7 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 
 下面以定义一个圆角并带阴影效果的 Drawable 为例，展示 LayerDrawable 的简单使用。
 
-**定义：**
+**定义**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -467,7 +469,7 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 </layer-list>
 ```
 
-**使用：**
+**使用**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -510,7 +512,7 @@ LayerDrawable 顶层标签为 **\<layer-list\>**，它可以包含多个 **\<ite
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-**效果图：**
+**效果图**
 
 ![gradient-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/layer-drawable.jpg)
 
@@ -543,7 +545,7 @@ LayerDrawable 根标签为 **\<layer-list\>**，它可以包含多个 **\<item\>
 
 ### 5.2 用法示例
 
-**定义：**
+**定义**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -570,7 +572,7 @@ LayerDrawable 根标签为 **\<layer-list\>**，它可以包含多个 **\<item\>
 </level-list>
 ```
 
-**使用：**
+**使用**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -619,9 +621,7 @@ class LevelListDrawableActivity : AppCompatActivity() {
 }
 ```
 
-
-
-**效果图：**
+**效果图**
 
 ![level-list-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/level-list-drawable.gif)
 
@@ -651,7 +651,7 @@ class LevelListDrawableActivity : AppCompatActivity() {
 
 ### 6.2 用法示例
 
-**定义：**
+**定义**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -663,7 +663,7 @@ class LevelListDrawableActivity : AppCompatActivity() {
        android:insetRight="10dp" />
 ```
 
-**使用：**
+**使用**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -686,7 +686,7 @@ class LevelListDrawableActivity : AppCompatActivity() {
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-**效果图：**
+**效果图**
 
 ![inset-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/inset-drawable.jpg)
 
@@ -712,11 +712,11 @@ ScaleDrawable 可以根据 level 值动态地将 Drawable 进行一定比例的�
 
 它的根标签为 **\<scale\>**，它的各个属性的含义分别是：
 
-**android:drawable：**
+**android:drawable**
 
 drawable 资源，可引用现有的的 Drawable
 
-**android:scaleGravity：** 
+**android:scaleGravity** 
 
 当图片尺寸小于 View 时，设置这个属性值可以对图片进行定位，可以使用 ”**|**“ 符号组合使用，所有值的含义分别为：
 
@@ -735,20 +735,52 @@ drawable 资源，可引用现有的的 Drawable
 |   clip_vertical   | 可设置为让子元素的上边缘和/或下边缘裁剪至其容器边界的附加选项。裁剪基于垂直重力：顶部重力裁剪上边缘，底部重力裁剪下边缘，任一重力不会同时裁剪两边。 |
 |  clip_horizontal  | 可设置为让子元素的左边和/或右边裁剪至其容器边界的附加选项。裁剪基于水平重力：左边重力裁剪右边缘，右边重力裁剪左边缘，任一重力不会同时裁剪两边。 |
 
-**android:scaleHeight：**
+**android:scaleHeight**
 
 Drawable 高的缩放比例，值越高最终结果越小。
 
-**android:scaleWidth：**
+**android:scaleWidth**
 
 Drawable 宽的缩放比例
 
 ### 7.2 用法示例
 
+ 这里采用定制一个大小可变的背景为例，展示 ScaleDrawable 的简单用法。
 
+**定义**
 
-**定义：**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<scale xmlns:android="http://schemas.android.com/apk/res/android"
+       android:drawable="@drawable/kakarotto"
+       android:scaleHeight="80%"
+       android:scaleWidth="80%"
+       android:scaleGravity="center" />
+```
 
-**使用：**
+**使用**
 
-**效果图：**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/drawable_scale"
+            android:id="@+id/button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+**效果图**
+
+![scale-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/scale-drawable.gif)
