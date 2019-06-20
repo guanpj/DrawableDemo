@@ -41,5 +41,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_clip_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, ClipDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_rotate_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, RotateDrawableActivity::class.java))
+        }
     }
 }
