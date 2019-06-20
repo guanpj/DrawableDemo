@@ -1021,8 +1021,113 @@ class RotateDrawableActivity : AppCompatActivity() {
 }
 ```
 
-
-
 **效果图**
 
 ![rotate-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/rotate-drawable.gif)
+
+## 10. TransitionDrawable
+
+有时候我们可能需要在两个图片切换的时候增加渐变效果，除了使用动画之外，这里还可以用 TransitionDrawable 轻松实现。
+
+### 10.1 语法
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<transition
+xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@[package:]drawable/drawable_resource"
+        android:id="@[+][package:]id/resource_name"
+        android:top="dimension"
+        android:right="dimension"
+        android:bottom="dimension"
+        android:left="dimension" />
+</transition>
+```
+
+它的根标签为 **\<transition\>**，它可以包含多个 **\<item\>** 标签，每个 item 表示一个 Drawable，item 的属性含义分别是：
+
+|                           属性                           |                             含义                             |
+| :------------------------------------------------------: | :----------------------------------------------------------: |
+|                     android:drawable                     |            drawable 资源，可引用现有的的 Drawable            |
+|                        android:id                        | iitem 的 id，使用"@+id/*name*"的形式表示。可通过 View.findViewById() 或者 Activity.findViewById() 方法查找到这个 Drawable |
+| android:top、android:right、android:bottom、android:left |           Drawable 相对于 View 在各个方向的偏移量            |
+
+### 10.2 用法示例
+
+这里定义一个淡入淡出效果的图片切换效果，展示 TransitionDrawable 的基本使用。
+
+**定义**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/kakarotto1" />
+    <item android:drawable="@drawable/kakarotto2" />
+</transition>
+```
+
+**使用**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="230dp"
+            android:layout_height="150dp"
+            android:background="@drawable/drawable_transition"
+            android:id="@+id/img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+```kotlin
+class TransitionDrawableActivity : AppCompatActivity() {
+    lateinit var disposable: Disposable
+    var reverse = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_transition_drawable)
+
+        var transitionDrawable = findViewById<ImageView>(R.id.img).background as TransitionDrawable
+
+        Observable.interval(3000, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<Long> {
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+                override fun onComplete() {
+                }
+
+                override fun onNext(t: Long) {
+                    if (!reverse) {
+                        transitionDrawable.startTransition(3000)
+                        reverse = true
+                    } else {
+                        transitionDrawable.reverseTransition(3000)
+                        reverse = false
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                }
+
+            })
+    }
+```
+
+**效果图**
+
+![transition-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/transition-drawable.gif)
+
