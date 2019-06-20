@@ -8,10 +8,13 @@ import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.Observable
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class ScaleDrawableActivity : AppCompatActivity() {
-    lateinit var scaleDrawable:ScaleDrawable
+    lateinit var scaleDrawable: ScaleDrawable
     var curLevel = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,24 +24,15 @@ class ScaleDrawableActivity : AppCompatActivity() {
         scaleDrawable = findViewById<Button>(R.id.button).background as ScaleDrawable
         scaleDrawable.level = 0
 
-        Observable.interval(200, TimeUnit.MILLISECONDS).subscribe {
-            mHandler.sendEmptyMessage(1)
-        }
-    }
-
-    var mHandler: Handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
-            scaleDrawable.level = curLevel
-            curLevel += 200
-            if (curLevel >= 10000) {
-                curLevel = 0
+        Observable.interval(200, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                scaleDrawable.level = curLevel
+                curLevel += 200
+                if (curLevel >= 10000) {
+                    curLevel = 0
+                }
+                Log.e("gpj", "level ${curLevel}")
             }
-            Log.e("gpj", "level ${curLevel}")
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mHandler.removeMessages(1)
     }
 }
