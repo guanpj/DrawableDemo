@@ -24,4 +24,9 @@ class LevelListDrawableActivity : AppCompatActivity() {
             msg?.what?.let { mImageView.setImageLevel(it%5) }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHandler.removeMessages(1)
+    }
 }

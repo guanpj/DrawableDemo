@@ -7,7 +7,7 @@
     <ImageView
             android:layout_width="230dp"
             android:layout_height="150dp"
-            android:src="@drawable/drawable_level_list"
+            android:background="@drawable/drawable_transition"
             android:id="@+id/img"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -45,5 +45,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_rotate_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, RotateDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_transition_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, TransitionDrawableActivity::class.java))
+        }
     }
 }
