@@ -692,7 +692,7 @@ class LevelListDrawableActivity : AppCompatActivity() {
 
 ## 7. ScaleDrawable
 
-ScaleDrawable 可以根据 level 值动态地将 Drawable 进行一定比例的缩放。
+ScaleDrawable 可以根据 level 值动态地将 Drawable 进行一定比例的缩放。当 level 的取值范围为 [0, 10000]，当 level 为 0 时表示隐藏；当 level 值为 1 时，Drawable 的大小为初始化时的缩放比例，当 level 值为 10000 时，Drawable 大小为 100% 缩放比例。
 
 ### 7.1 语法
 
@@ -781,6 +781,248 @@ Drawable 宽的缩放比例
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
+```kotlin
+class ScaleDrawableActivity : AppCompatActivity() {
+    lateinit var scaleDrawable: ScaleDrawable
+    var curLevel = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_scale_drawable)
+
+        scaleDrawable = findViewById<Button>(R.id.button).background as ScaleDrawable
+        scaleDrawable.level = 0
+
+        Observable.interval(200, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                scaleDrawable.level = curLevel
+                curLevel += 200
+                if (curLevel >= 10000) {
+                    curLevel = 0
+                }
+                Log.e("gpj", "level ${curLevel}")
+            }
+    }
+}
+```
+
 **效果图**
 
 ![scale-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/scale-drawable.gif)
+
+## 8. ClipDrawable
+
+与 ScaleDrawable 原理相同，ClipDrawable 则可以根据 level 值动态地将 Drawable 进行一定比例的剪裁。当 level 的取值范围为 [0, 10000]，当 level 为 0 时表示隐藏；当 level 值为 1 时，Drawable 的大小为初始化时的剪裁比例，当 level 值为 10000 时，Drawable 大小为 100% 剪裁比例。
+
+### 8.1 语法
+
+定义 ClipDrawable 的语法规则如下：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<clip xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/drawable_resource"
+    android:clipOrientation=["horizontal" | "vertical"]
+    android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
+                     "fill_vertical" | "center_horizontal" | "fill_horizontal" |
+                     "center" | "fill" | "clip_vertical" | "clip_horizontal"] />
+```
+
+它的根标签为 **\<clip\>**，各个属性的含义分别是：
+
+**android:drawable**
+
+drawable 资源，可引用现有的的 Drawable
+
+**android:clipOrientation**
+
+剪裁方向，horizontal 表示水平方向剪裁，vertical 表示竖直方向剪裁
+
+**android:gravity** 
+
+gravity 属性需要配合 clipOrientation 来使用，可以使用 ”**|**“ 符号组合使用，所有值的含义分别为：
+
+|        值         |                             说明                             |
+| :---------------: | :----------------------------------------------------------: |
+|        top        | 将对象放在其容器顶部，不改变其大小。当 `clipOrientation` 是 `"vertical"` 时，在可绘制对象的底部裁剪。 |
+|      bottom       | 将对象放在其容器底部，不改变其大小。当 `clipOrientation` 是 `"vertical"` 时，在可绘制对象的顶部裁剪。 |
+|       left        | 将对象放在其容器左边缘，不改变其大小。这是默认值。当 `clipOrientation` 是 `"horizontal"` 时，在可绘制对象的右边裁剪。这是默认值。 |
+|       right       | 将对象放在其容器右边缘，不改变其大小。当 `clipOrientation` 是 `"horizontal"`时，在可绘制对象的左边裁剪。 |
+|  center_vertical  | 将对象放在其容器的垂直中心，不改变其大小。裁剪行为与重力为 `"center"` 时相同。 |
+|   fill_vertical   | 按需要扩展对象的垂直大小，使其完全适应其容器。当 `clipOrientation` 是 `"vertical"` 时，不会进行裁剪，因为可绘制对象会填充垂直空间（除非可绘制对象级别为 0，此时它不可见）。 |
+| center_horizontal | 将对象放在其容器的水平中心，不改变其大小。裁剪行为与重力为 `"center"` 时相同。 |
+|  fill_horizontal  | 按需要扩展对象的水平大小，使其完全适应其容器。当 `clipOrientation` 是 `"horizontal"` 时，不会进行裁剪，因为可绘制对象会填充水平空间（除非可绘制对象级别为 0，此时它不可见）。 |
+|      center       | 将对象放在其容器的水平和垂直轴中心，不改变其大小。当 `clipOrientation` 是 `"horizontal"` 时，在左边和右边裁剪。当 `clipOrientation` 是 `"vertical"` 时，在顶部和底部裁剪。 |
+|       fill        | 按需要扩展对象的垂直大小，使其完全适应其容器。不会进行裁剪，因为可绘制对象会填充水平和垂直空间（除非可绘制对象级别为 0，此时它不可见）。 |
+|   clip_vertical   | 可设置为让子元素的上边缘和/或下边缘裁剪至其容器边界的附加选项。裁剪基于垂直重力：顶部重力裁剪上边缘，底部重力裁剪下边缘，任一重力不会同时裁剪两边。 |
+|  clip_horizontal  | 可设置为让子元素的左边和/或右边裁剪至其容器边界的附加选项。裁剪基于水平重力：左边重力裁剪右边缘，右边重力裁剪左边缘，任一重力不会同时裁剪两边。 |
+
+### 8.2 用法示例
+
+**定义**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<clip xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/drawable_resource"
+    android:clipOrientation=["horizontal" | "vertical"]
+    android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
+                     "fill_vertical" | "center_horizontal" | "fill_horizontal" |
+                     "center" | "fill" | "clip_vertical" | "clip_horizontal"] />
+```
+
+**使用**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/drawable_clip"
+            android:id="@+id/button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+```kotlin
+class ClipDrawableActivity : AppCompatActivity() {
+    lateinit var clipDrawable: ClipDrawable
+    var curLevel = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_clip_drawable)
+
+        clipDrawable = findViewById<Button>(R.id.button).background as ClipDrawable
+        clipDrawable.level = 0
+
+        Observable.interval(50, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                clipDrawable.level = curLevel
+                curLevel += 200
+                if (curLevel >= 10000) {
+                    curLevel = 0
+                }
+                Log.e("gpj", "level ${curLevel}")
+            }
+    }
+}
+```
+
+**效果图**
+
+![clip-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/clip-drawable.gif)
+
+## 9. RotateDrawable
+
+与 ScaleDrawable 和 ClipDrawable 类似，RotateDrawable 可以根据 level 值将 Drawable 进行动态旋转。
+
+### 9.1 语法
+
+RotateDrawable 的定义方法如下：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/drawable_resource"
+    android:visible=["true" | "false"]
+    android:fromDegrees="integer" 
+    android:toDegrees="integer"
+    android:pivotX="percentage"
+    android:pivotY="percentage" />
+```
+
+它的根标签为 **\<clip\>**，各个属性的含义分别是：
+
+|        属性         |                  含义                  |
+| :-----------------: | :------------------------------------: |
+|  android:drawable   | drawable 资源，可引用现有的的 Drawable |
+|   android:visible   |                是否可见                |
+| android:fromDegrees |              旋转起始角度              |
+|  android:toDegrees  |              旋转结束角度              |
+|   android:pivotX    |       旋转中心位于 X 轴的百分比        |
+|   android:pivotY    |       旋转中心位于 Y 轴的百分比        |
+
+### 9.2 用法示例
+
+下面以定义一个可旋转的背景为例展示 RotateDrawable 的简单使用
+
+**定义**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+        android:drawable="@drawable/kakarotto"
+        android:fromDegrees="0"
+        android:toDegrees="180"
+        android:pivotX="50%"
+        android:pivotY="50%"/>
+```
+
+**使用**
+
+```xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/drawable_rotate"
+            android:id="@+id/button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+```kotlin
+class RotateDrawableActivity : AppCompatActivity() {
+    lateinit var rotateDrawable: RotateDrawable
+    var curLevel = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_rotate_drawable)
+
+        rotateDrawable = findViewById<Button>(R.id.button).background as RotateDrawable
+        rotateDrawable.level = 0
+
+        Observable.interval(50, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                rotateDrawable.level = curLevel
+                curLevel += 200
+                if (curLevel >= 10000) {
+                    curLevel = 0
+                }
+                Log.e("gpj", "level ${curLevel}")
+            }
+    }
+}
+```
+
+
+
+**效果图**
+
+![rotate-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/rotate-drawable.gif)
