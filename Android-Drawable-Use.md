@@ -1131,3 +1131,68 @@ class TransitionDrawableActivity : AppCompatActivity() {
 
 ![transition-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/transition-drawable.gif)
 
+## 11. VectorDrawable
+
+从 API 11(Android 5.0) 开始，Google 开始支持使用 Vector，VectorDrawable 应运而生。相比于普通的 Drawable，它具有以下优点：
+
+- Vector 图像可以自动进行适配，不需要通过分辨率来设置不同的图片
+
+- Vector 图像可以大幅减少图像的体积，同样一张图，用 Vector 来实现，可能只有 PNG 的几十分之一
+
+- 使用简单，很多设计工具都可以直接导出 SVG 图像，从而转换成 Vector 图像
+
+- 功能强大，不用写很多代码就可以实现非常复杂的动画
+
+- 成熟、稳定，目前已经非常广泛地进行使用了
+
+### 11.1 语法
+
+定义一个 VectorDrawable 的语法如下：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="string"
+    android:width="dimension"
+    android:height="dimension"
+    android:viewportHeight="float"
+    android:viewportWidth="float"
+    android:tint="color"
+    android:tintMode=["add" | "multiply" | "src_top" | "src_in" | "src_over" | "screen"]
+    android:autoMirrored=["true" | "false"]
+    android:alpha="integer" />
+    <group
+        android:name="string"
+        android:pivotX="30"
+        android:pivotY="200"
+        android:rotation="90">
+        <path
+            android:pathData="path"
+            android:fillColor="color"
+            android:strokeColor="color"
+            android:strokeWidth="integer"
+            android:strokeAlpha="integer"
+            android:trimPathEnd="float"
+            android:trimPathOffset="float"
+            android:strokeLineCap=["butt" | "round" | "square"]
+            android:strokeLineJoin=["round" | "bevel" | "miter"]
+            android:strokeMiterLimit=
+            android:fillType=["nonZero" | "evenOdd"] />
+        <clip-path
+            android:name="string"
+            android:pathData="path" />
+    </group>
+</vector>
+```
+
+
+
+### 11.2 用法示例
+
+**定义**
+
+**使用**
+
+**效果图**
+
+### 11.3 兼容性问题
