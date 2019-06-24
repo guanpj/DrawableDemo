@@ -1163,15 +1163,21 @@ class TransitionDrawableActivity : AppCompatActivity() {
     android:alpha="integer" />
     <group
         android:name="string"
-        android:pivotX="30"
-        android:pivotY="200"
-        android:rotation="90">
+        android:pivotX="float"
+        android:pivotY="float"
+        android:rotation="integer"
+        android:translationX="float"
+        android:translationY="float"
+        android:scaleX="float"
+        android:scaleY="float">
         <path
             android:pathData="path"
             android:fillColor="color"
+            android:fillAlpha="integer"
             android:strokeColor="color"
             android:strokeWidth="integer"
             android:strokeAlpha="integer"
+            android:trimPathStart="float"
             android:trimPathEnd="float"
             android:trimPathOffset="float"
             android:strokeLineCap=["butt" | "round" | "square"]
