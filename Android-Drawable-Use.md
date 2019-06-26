@@ -1133,7 +1133,7 @@ class TransitionDrawableActivity : AppCompatActivity() {
 
 ## 11. VectorDrawable
 
-从 API 11(Android 5.0) 开始，Google 开始支持使用 Vector，VectorDrawable 应运而生。相比于普通的 Drawable，它具有以下优点：
+从 API 21(Android 5.0) 开始，Google 开始支持使用 Vector，VectorDrawable 应运而生。相比于普通的 Drawable，它具有以下优点：
 
 - Vector 图像可以自动进行适配，不需要通过分辨率来设置不同的图片
 
@@ -1182,7 +1182,7 @@ class TransitionDrawableActivity : AppCompatActivity() {
             android:trimPathOffset="float"
             android:strokeLineCap=["butt" | "round" | "square"]
             android:strokeLineJoin=["round" | "bevel" | "miter"]
-            android:strokeMiterLimit=
+            android:strokeMiterLimit="integer"
             android:fillType=["nonZero" | "evenOdd"] />
         <clip-path
             android:name="string"
@@ -1191,7 +1191,45 @@ class TransitionDrawableActivity : AppCompatActivity() {
 </vector>
 ```
 
+VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 
+|                     属性                      |                             含义                             |
+| :-------------------------------------------: | :----------------------------------------------------------: |
+|                 android:name                  |                       drawable 的名字                        |
+|         android:width、android:height         |            内部(intrinsic)宽度和高度。一般使用 dp            |
+| android:viewportWidth、android:viewportHeight | 矢量图视图的宽度和高度。视图就是矢量图 path 路径数据所绘制的虚拟画布 |
+|                 android:tint                  |                         给矢量图着色                         |
+|               android:tintMode                | 着色模式。共支持六种模式，默认为“src_in"，详情请参考 [PorterDuff.Mode](https://www.jianshu.com/p/d11892bbe055) |
+|             android:autoMirrored              | 某些西亚国家文字是从右至左的，设置此值表示当系统为 RTL (right-to-left) 布局的时候，是否对图片进行镜像翻转 |
+|                 android:alpha                 |      图片透明度。取值范围为 [0, 255]VectorDrawble 支持       |
+
+一张矢量图可以由多个 **path** 组成，**\<group\>** 标签可以对多个 path 进行分组，标签内的属性值对组内所有 path 都生效，<group\> 标签的各个属性及其含义分别为如下：
+
+|                    属性                    |                             含义                             |
+| :----------------------------------------: | :----------------------------------------------------------: |
+|                android:name                |                          分组的名字                          |
+|       android:pivotX、android:pivotY       | 缩放和旋转时候的 X 和 Y 的基准点。该值是相对于 vector 的 viewport 值来指定的 |
+| android:translationX、android:translationY | X 轴和 Y 轴方向的平移位移。该值同样是相对于 viewport 值来指定的 |
+|              android:rotation              |                           旋转角度                           |
+|       android:scaleX、android:scaleY       |               分别在 X 轴和 Y 轴方向的缩放比例               |
+
+接下来就是 **\<path\>** 标签了，<path\> 标签定了的矢量图的绘制方法，包括绘制路径、颜色、边框样式等属性，它的所有属性及其含义如下：
+
+|           属性           |                             含义                             |
+| :----------------------: | :----------------------------------------------------------: |
+|     android:pathData     | path 指令。指令格式参考：[路径](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths) |
+|    android:fillColor     | path 填充颜色。一般为纯色，API 24 开始支持 Gradient 渐变色，详情请参考：[vectordrawable-gradients-part1](https://blog.stylingandroid.com/vectordrawable-gradients-part1/) 和 [vectordrawable-gradients-part1-2/](https://blog.stylingandroid.com/vectordrawable-gradients-part1-2/) |
+|    android:fillAlpha     | X 轴和 Y 轴方向的平移位移。该值同样是相对于 viewport 值来指定的 |
+|     android:fillType     | path 的填充模式。默认是"noneZero"，详情参考：[非零环绕数规则和奇-偶规则](https://blog.csdn.net/freshforiphone/article/details/8273023) 和 [Android 关于Path的FillType](https://www.jianshu.com/p/ce808a9e7e38) |
+|   android:strokeWidth    |                        path 边框宽度                         |
+|   android:strokeColor    |                        path 边框颜色                         |
+|   android:strokeAlpha    |                       path 边框透明度                        |
+|  android:strokeLineCap   | path 线头的形状。`buff` 平头、`round` 圆头和 `square 方头。默认为 `buff` |
+|  android:strokeLineJoin  | path 拐角的形状。`miter` 尖角、 `bevel` 平角和 `round` 圆角。默认为 `miter` |
+| android:strokeMiterLimit | 设置拐角的形状为 `miter` 时，拐角的延长线的最大值。当大到一定程度时，miter 效果将会失效从而变成 bevel 效果 |
+|  android:trimPathStart   |       从path 起始位置截断路径的比率。取值范围为[0, 1]        |
+|   android:trimPathEnd    |       从 path 结束位置截断路径的比率。取值范围为[0, 1]       |
+|  android:trimPathOffset  |              path 截取的范围。取值范围为[0, 1]               |
 
 ### 11.2 用法示例
 
