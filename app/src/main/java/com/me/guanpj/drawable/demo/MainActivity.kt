@@ -49,5 +49,13 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_transition_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, TransitionDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_vector_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, VectorDrawableActivity::class.java))
+        }
+
+        findViewById<Button>(R.id.btn_animated_vector_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, AnimatedVectorDrawableActivity::class.java))
+        }
     }
 }

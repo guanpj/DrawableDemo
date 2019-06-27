@@ -1171,6 +1171,7 @@ class TransitionDrawableActivity : AppCompatActivity() {
         android:scaleX="float"
         android:scaleY="float">
         <path
+            android:name="string"
             android:pathData="path"
             android:fillColor="color"
             android:fillAlpha="integer"
@@ -1217,6 +1218,7 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 
 |           属性           |                             含义                             |
 | :----------------------: | :----------------------------------------------------------: |
+|                          |                                                              |
 |     android:pathData     | path 指令。指令格式参考：[路径](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths) |
 |    android:fillColor     | path 填充颜色。一般为纯色，API 24 开始支持 Gradient 渐变色，详情请参考：[vectordrawable-gradients-part1](https://blog.stylingandroid.com/vectordrawable-gradients-part1/) 和 [vectordrawable-gradients-part1-2/](https://blog.stylingandroid.com/vectordrawable-gradients-part1-2/) |
 |    android:fillAlpha     | X 轴和 Y 轴方向的平移位移。该值同样是相对于 viewport 值来指定的 |
@@ -1312,9 +1314,32 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 </vector>
 ```
 
+**使用**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/drawable_vector"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+
+
 **效果图**
 
-![vector-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/vector-drawable.png)
+![vector-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/vector-drawable.jpg)
 
 ### 11.3 兼容性问题
 
@@ -1322,7 +1347,7 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 
 # 12 AnimatedVectorDrawable
 
-
+与 VetorDrawable 一起诞生的还有 AnimatedVectorDrawable，
 
 ### 12.1 语法
 
