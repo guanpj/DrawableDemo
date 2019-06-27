@@ -10,19 +10,21 @@
             android:strokeLineCap="butt"
             android:pathData="M5 10 l200 0"/>
 
+    <!--从路径起点位置的 10% 部分开始，往后截断 50% 的路径-->
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
             android:strokeLineCap="butt"
             android:trimPathStart="0.5"
-            android:trimPathOffset="0.2"
+            android:trimPathOffset="0.1"
             android:pathData="M5 80 l200 0"/>
+    <!--从路径起点位置的 80% 部分开始，往后截取 50% 的路径，到 path 末端之后循环至头部-->
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
             android:strokeLineCap="butt"
             android:trimPathEnd="0.5"
-            android:trimPathOffset="0.2"
+            android:trimPathOffset="0.8"
             android:pathData="M5 150 l200 0"/>
 
     <path
