@@ -1224,9 +1224,9 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 |   android:strokeWidth    |                        path 边框宽度                         |
 |   android:strokeColor    |                        path 边框颜色                         |
 |   android:strokeAlpha    |                       path 边框透明度                        |
-|  android:strokeLineCap   | path 线头的形状。`buff` 平头、`round` 圆头和 `square 方头。默认为 `buff` |
+|  android:strokeLineCap   | path 线头的形状。`buff` 平头、`round` 圆头和 `square` 方头。默认为 `buff` |
 |  android:strokeLineJoin  | path 拐角的形状。`miter` 尖角、 `bevel` 平角和 `round` 圆角。默认为 `miter` |
-| android:strokeMiterLimit | 设置拐角的形状为 `miter` 时，拐角的延长线的最大值。当大到一定程度时，miter 效果将会失效从而变成 bevel 效果 |
+| android:strokeMiterLimit | 设置拐角的形状为 `miter` 时，拐角的延长线的最大值。当小到一定程度时，miter 效果将会失效从而变成 bevel 效果 |
 |  android:trimPathStart   |       从path 起始位置截断路径的比率。取值范围为[0, 1]        |
 |   android:trimPathEnd    |       从 path 结束位置截断路径的比率。取值范围为[0, 1]       |
 |  android:trimPathOffset  |              path 截取的范围。取值范围为[0, 1]               |
@@ -1234,6 +1234,12 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 ### 11.2 用法示例
 
 **定义**
+
+```xml
+
+```
+
+
 
 **使用**
 
