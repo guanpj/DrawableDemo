@@ -86,11 +86,19 @@
             android:layout_marginTop="5dp" />
 
     <Button
-            android:text="StateListDrawable"
+            android:text="VectorDrawable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button5"
+            android:id="@+id/btn_vector_drawable" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_transition_drawable"
+            android:layout_marginTop="5dp" />
+
+    <Button
+            android:text="AnimatedVectorDrawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_animated_vector_drawable"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_transition_drawable" android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_vector_drawable" android:layout_marginTop="5dp"
             app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
             android:strokeWidth="15"
             android:strokeColor="#000000"
             android:strokeLineCap="butt"
-            android:pathData="M5 10 l200 0"/>
+            android:pathData="M20 50 l200 0"/>
     <!--路径起点/终点往后偏移 10%，从新起点开始往后截断至 50% 的路径-->
     <path
             android:strokeWidth="15"
@@ -16,7 +16,7 @@
             android:strokeLineCap="butt"
             android:trimPathStart="0.5"
             android:trimPathOffset="0.1"
-            android:pathData="M5 80 l200 0"/>
+            android:pathData="M20 100 l200 0"/>
     <!--路径起点/终点往后偏移 50%，从新终点往前截断至 70% 部分-->
     <!--也可以理解为从新起点往后截取至 70% 部分-->
     <path
@@ -25,27 +25,27 @@
             android:strokeLineCap="butt"
             android:trimPathEnd="0.7"
             android:trimPathOffset="0.5"
-            android:pathData="M5 150 l200 0"/>
+            android:pathData="M20 150 l200 0"/>
 
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
             android:strokeLineCap="square"
             android:strokeLineJoin="round"
-            android:pathData="M5 230 l200 0 l-100 30"/>
+            android:pathData="M20 230 l200 0 l-100 30"/>
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
             android:strokeLineCap="butt"
             android:strokeLineJoin="miter"
-            android:pathData="M5 290 l200 0 l-100 30"/>
+            android:pathData="M20 290 l200 0 l-100 30"/>
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
             android:strokeLineCap="round"
             android:strokeLineJoin="miter"
             android:strokeMiterLimit="7"
-            android:pathData="M5 350 l200 0 l-100 30"/>
+            android:pathData="M20 350 l200 0 l-100 30"/>
 
     <group
             android:name="name"

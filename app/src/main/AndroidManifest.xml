@@ -29,6 +29,8 @@
         <activity android:name=".ClipDrawableActivity"/>
         <activity android:name=".RotateDrawableActivity"/>
         <activity android:name=".TransitionDrawableActivity"/>
+        <activity android:name=".VectorDrawableActivity"/>
+        <activity android:name=".AnimatedVectorDrawableActivity"/>
 
     </application>
 

@@ -1227,22 +1227,109 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 |  android:strokeLineCap   | path 线头的形状。`buff` 平头、`round` 圆头和 `square` 方头。默认为 `buff` |
 |  android:strokeLineJoin  | path 拐角的形状。`miter` 尖角、 `bevel` 平角和 `round` 圆角。默认为 `miter` |
 | android:strokeMiterLimit | 设置拐角的形状为 `miter` 时，拐角的延长线的最大值。当小到一定程度时，miter 效果将会失效从而变成 bevel 效果 |
-|  android:trimPathStart   |       从path 起始位置截断路径的比率。取值范围为[0, 1]        |
+|  android:trimPathStart   |       从 path 起始位置截断路径的比率。取值范围为[0, 1]       |
 |   android:trimPathEnd    |       从 path 结束位置截断路径的比率。取值范围为[0, 1]       |
-|  android:trimPathOffset  |              path 截取的范围。取值范围为[0, 1]               |
+|  android:trimPathOffset  | path 截取起点的偏移量。取值范围为[0, 1]，由于 path 的起点和终点可以看作的首尾相连的，因此起点和终点是一起发生偏移的 |
 
 ### 11.2 用法示例
 
 **定义**
 
 ```xml
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="200dp"
+        android:height="200dp"
+        android:viewportHeight="600"
+        android:viewportWidth="600">
+    <path
+            android:strokeWidth="15"
+            android:strokeColor="#000000"
+            android:strokeLineCap="butt"
+            android:pathData="M5 10 l200 0"/>
+    <!--路径起点/终点往后偏移 10%，从新起点开始往后截断至 50% 的路径-->
+    <path
+            android:strokeWidth="15"
+            android:strokeColor="#000000"
+            android:strokeLineCap="butt"
+            android:trimPathStart="0.5"
+            android:trimPathOffset="0.1"
+            android:pathData="M5 80 l200 0"/>
+    <!--路径起点/终点往后偏移 50%，从新终点往前截断至 70% 部分-->
+    <!--也可以理解为从新起点往后截取至 70% 部分-->
+    <path
+            android:strokeWidth="15"
+            android:strokeColor="#000000"
+            android:strokeLineCap="butt"
+            android:trimPathEnd="0.7"
+            android:trimPathOffset="0.5"
+            android:pathData="M5 150 l200 0"/>
 
+    <path
+            android:strokeWidth="15"
+            android:strokeColor="#000000"
+            android:strokeLineCap="square"
+            android:strokeLineJoin="round"
+            android:pathData="M5 230 l200 0 l-100 30"/>
+    <path
+            android:strokeWidth="15"
+            android:strokeColor="#000000"
+            android:strokeLineCap="butt"
+            android:strokeLineJoin="miter"
+            android:pathData="M5 290 l200 0 l-100 30"/>
+    <path
+            android:strokeWidth="15"
+            android:strokeColor="#000000"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="miter"
+            android:strokeMiterLimit="7"
+            android:pathData="M5 350 l200 0 l-100 30"/>
+
+    <group
+            android:name="name"
+            android:translateX="10"
+            android:translateY="10"
+            android:rotation="90"
+            android:pivotX="300"
+            android:pivotY="300">
+        <path
+                android:name="noneZero"
+                android:strokeWidth="2"
+                android:strokeColor="#ffffff"
+                android:fillColor="#3C8FC1"
+                android:pathData="M20 120 a100 100 0 1 1 200 0 a100 100 0 1 1 -200 0
+            M40 120 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0"/>
+        <path
+                android:name="evenOdd"
+                android:strokeWidth="5"
+                android:strokeColor="#ffffff"
+                android:strokeAlpha="128"
+                android:fillColor="#3C8FC1"
+                android:fillType="evenOdd"
+                android:pathData="M260 120 a100 100 0 1 1 200 0 a100 100 0 1 1 -200 0
+            M280 120 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0"/>
+    </group>
+</vector>
 ```
 
+**效果图**
 
+![vector-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/vector-drawable.png)
+
+### 11.3 兼容性问题
+
+由于 VectorDrawable 是从 Android 5.0 之后引入的，如果想要在旧设备上运行，就必须要进行兼容性设置，由于篇幅有限，可以参考[Android Vector曲折的兼容之路](https://blog.csdn.net/eclipsexys/article/details/51838119)，这里不再赘述。
+
+# 12 AnimatedVectorDrawable
+
+
+
+### 12.1 语法
+
+### 12.2 用法示例
+
+**定义**
 
 **使用**
 
 **效果图**
-
-### 11.3 兼容性问题
