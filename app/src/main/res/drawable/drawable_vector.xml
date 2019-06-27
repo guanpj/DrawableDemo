@@ -9,8 +9,7 @@
             android:strokeColor="#000000"
             android:strokeLineCap="butt"
             android:pathData="M5 10 l200 0"/>
-
-    <!--路径起点/终点往后偏移 10%，从新起点开始往后截断 50% 的路径-->
+    <!--路径起点/终点往后偏移 10%，从新起点开始往后截断至 50% 的路径-->
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
@@ -18,7 +17,8 @@
             android:trimPathStart="0.5"
             android:trimPathOffset="0.1"
             android:pathData="M5 80 l200 0"/>
-    <!--路径起点/终点往后偏移 50%，从新终点往前截取 70% 的路径-->
+    <!--路径起点/终点往后偏移 50%，从新终点往前截断至 70% 部分-->
+    <!--也可以理解为从新起点往后截取至 70% 部分-->
     <path
             android:strokeWidth="15"
             android:strokeColor="#000000"
