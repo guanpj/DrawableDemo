@@ -3,6 +3,7 @@
                  xmlns:aapt="http://schemas.android.com/aapt"
                  android:drawable="@drawable/ic_checked">
 
+    <!--打勾 path 动画-->
     <target android:name="tick">
         <aapt:attr name="android:animation">
             <objectAnimator
@@ -15,6 +16,7 @@
         </aapt:attr>
     </target>
 
+    <!--圆圈 path 动画-->
     <target android:name="circle">
         <aapt:attr name="android:animation">
             <objectAnimator
