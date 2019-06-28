@@ -62,5 +62,9 @@ class MainActivity : AppCompatActivity() {
         btn_animated_state_list_drawable.setOnClickListener {
             startActivity(Intent(MainActivity@this, AnimatedStateListDrawableActivity::class.java))
         }
+
+        btn_animated_image_drawable.setOnClickListener {
+            startActivity(Intent(MainActivity@this, AnimatedImageDrawableActivity::class.java))
+        }
     }
 }

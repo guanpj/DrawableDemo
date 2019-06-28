@@ -32,6 +32,7 @@
         <activity android:name=".VectorDrawableActivity"/>
         <activity android:name=".AnimatedVectorDrawableActivity"/>
         <activity android:name=".AnimatedStateListDrawableActivity"/>
+        <activity android:name=".AnimatedImageDrawableActivity"/>
 
     </application>
 

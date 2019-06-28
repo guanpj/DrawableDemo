@@ -311,7 +311,10 @@ StateListDrawable 可以根据对象的状态并使用不同的 item(Drawable) �
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:constantSize=["true" | "false"]
     android:dither=["true" | "false"]
-    android:variablePadding=["true" | "false"] >
+    android:variablePadding=["true" | "false"] 
+    android:autoMirrored=["true" | "false"] 
+    android:enterFadeDuration="integer"
+    android:exitFadeDuration="integer">
     <item
         android:drawable="@[package:]drawable/drawable_resource"
         android:state_pressed=["true" | "false"]
@@ -340,6 +343,14 @@ StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义
 
 是否开启抖动效果，默认为 true，建议开启。
 
+**android:autoMirrored** 
+
+某些西亚国家文字是从右至左的，设置此值表示当系统为 RTL (right-to-left) 布局的时候，是否对图片进行镜像翻转。
+
+**android:enterFadeDuration** 和 **android:exitFadeDuration**
+
+状态改变时的淡入淡出效果的持续时间
+
 **\<item\>**
 
 每个 item 表示一个 Drawable，item 的属性含义分别是：
@@ -365,7 +376,13 @@ StateListDrawable 的根标签为 **\<selector\>，**各个属性标签的含义
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visible="true"
+        android:dither="true"
+        android:autoMirrored="true"
+        android:enterFadeDuration="200"
+        android:exitFadeDuration="200" >
     <!--获取焦点状态-->
     <item
             android:state_focused="true"
@@ -1192,7 +1209,7 @@ class TransitionDrawableActivity : AppCompatActivity() {
 </vector>
 ```
 
-VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
+VectorDrawable 的根标签为 **\<vector>**，老规矩，先看看它的子元素属性和含义：
 
 |                     属性                      |                             含义                             |
 | :-------------------------------------------: | :----------------------------------------------------------: |
@@ -1201,7 +1218,7 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 | android:viewportWidth、android:viewportHeight | 矢量图视图的宽度和高度。视图就是矢量图 path 路径数据所绘制的虚拟画布 |
 |                 android:tint                  |                         给矢量图着色                         |
 |               android:tintMode                | 着色模式。共支持六种模式，默认为“src_in"，详情请参考 [PorterDuff.Mode](https://www.jianshu.com/p/d11892bbe055) |
-|             android:autoMirrored              | 某些西亚国家文字是从右至左的，设置此值表示当系统为 RTL (right-to-left) 布局的时候，是否对图片进行镜像翻转 |
+|             android:autoMirrored              |                           自动翻转                           |
 |                 android:alpha                 |      图片透明度。取值范围为 [0, 255]VectorDrawble 支持       |
 
 一张矢量图可以由多个 **path** 组成，**\<group\>** 标签可以对多个 path 进行分组，标签内的属性值对组内所有 path 都生效，<group\> 标签的各个属性及其含义分别为如下：
@@ -1335,8 +1352,6 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-
-
 **效果图**
 
 ![vector-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/vector-drawable.jpg)
@@ -1347,14 +1362,290 @@ VectorDrawable 的根标签为 **\<vector>**，其各个属性及含义如下：
 
 # 12 AnimatedVectorDrawable
 
-与 VetorDrawable 一起诞生的还有 AnimatedVectorDrawable，
+当你以为 VectorDrawable 除了替代传统图标别无它用那你就实在 too young 了，与 VetorDrawable 一起诞生的还有 **AnimatedVectorDrawable**。还记得 VectorDrawable 中的 `group`  和 `path` 有个 **name** 属性吗？这时候它们就派上用场了，AnimatedVectorDrawable 可以通过 name 属性为 group 和 path 绑定一个属性动画，让这些 path 可以动起来，做出比较炫酷的动画效果。在 API 25 之前，因为渲染是在 UI 线程进行的的，因此性能不是很好，加上兼容性问题，目前使用得并不多。自从 API 25 之后，Google 将 AnimatedVectorDrawable 的渲染放在了 RenderThered 中执行，这显然减轻了不少 UI 线程的压力，Google 官方描述是：
+
+> This means animations in AnimatedVectorDrawable can remain smooth even when there is heavy workload on the UI thread. 
+
+因此，如果运行在新设备上，大家大可不必操心性能问题了。
 
 ### 12.1 语法
 
+```xml
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+     android:drawable="@[package:]drawable/drawable_resource" >
+     <target
+         android:name="string"
+         android:animation="@[package:]animator/animator_resource" />
+ </animated-vector>
+```
+
+AnimatedVectorDrawable 的根标签为 **\<animated-vector\>**，`android:drawable` 属性用来指定 VectorDrawable 资源，**\<target\>** 标签将它的子元素 `name` 属性指定的 VectorDrawable 中需要添加动画效果的 path 或者 group 与 `animation` 属性中的 animator 资源绑定起来。animation 资源同样可以通过标签定义或者指向现有的 animator 文件。
+
 ### 12.2 用法示例
+
+下面以前面文章中提到的 Demo 中的一个效果为例，展示一个 AnimatedVectorDrawable 的基本用法。
 
 **定义**
 
+需要添加动画效果的 VectorDrawable，一共有两个 path：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt"
+        android:drawable="@drawable/ic_arrow">
+
+    <target android:name="left">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="1000"
+                    android:interpolator="@android:interpolator/anticipate_overshoot"
+                    android:propertyName="translateX"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0"
+                    android:valueTo="-10"
+                    android:valueType="floatType"/>
+        </aapt:attr>
+    </target>
+
+    <target android:name="right">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="1000"
+                    android:interpolator="@android:interpolator/anticipate_overshoot"
+                    android:propertyName="translateX"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0"
+                    android:valueTo="10"
+                    android:valueType="floatType"/>
+        </aapt:attr>
+    </target>
+
+</animated-vector>
+```
+
 **使用**
 
+在代码中监听和控制动画：
+
+```kotlin
+class AnimatedVectorDrawableActivity : AppCompatActivity() {
+    private lateinit var animatable2Compat: Animatable2Compat
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_animated_vector_drawable)
+
+        var image = findViewById<ImageView>(R.id.image)
+        var animatedVectorDrawableCompat = AnimatedVectorDrawableCompat.create(this, R.drawable.drawable_animated_vector)
+        image.setImageDrawable(animatedVectorDrawableCompat)
+        animatable2Compat = image.drawable as Animatable2Compat
+        animatable2Compat.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
+            override fun onAnimationStart(drawable: Drawable?) {
+                Log.e("gpj", "onAnimationStart")
+            }
+            override fun onAnimationEnd(drawable: Drawable?) {
+                Log.e("gpj", "onAnimationEnd")
+            }
+        })
+        animatable2Compat.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        animatable2Compat.stop()
+    }
+}
+```
+
 **效果图**
+
+![animated-vector-drawable](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/animated-vector-drawable.gif)
+
+# 13 AnimatedStateListDrawable
+
+前面提到的 StateListDrawable 只能使用静态的资源在不同的状态之间进行切换，同样的，在 Android 5.0 之后，状态列表里可以使用动态资源了，它就是 **AnimatedStateListDrawable**。
+
+### 13.1 语法
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:constantSize=["true" | "false"]
+    android:dither=["true" | "false"]
+    android:variablePadding=["true" | "false"] 
+    android:autoMirrored=["true" | "false"] 
+    android:enterFadeDuration="integer"
+    android:exitFadeDuration="integer">
+    <item
+        android:id="@[+][package:]id/resource_name"
+        android:drawable="@[package:]drawable/drawable_resource"
+        android:state_pressed=["true" | "false"]
+        android:state_focused=["true" | "false"]
+        android:state_hovered=["true" | "false"]
+        android:state_selected=["true" | "false"]
+        android:state_checkable=["true" | "false"]
+        android:state_checked=["true" | "false"]
+        android:state_enabled=["true" | "false"]
+        android:state_activated=["true" | "false"]
+        android:state_window_focused=["true" | "false"] />
+    <transition
+        android:drawable="@[package:]drawable/drawable_resource"
+        android:fromId="@[package:]id/item_name"
+        android:toId="@[package:]id/item_name" />
+</selector>
+```
+
+可以发现，相对于 StateListDrawable，这里只多出一个 **\<transition\>** 标签，它的各个属性含义分别是：
+
+**android:drawable**
+
+定义或者指向一个 AnimatedVectorDrawable 资源。不难理解，这里需要指定状态变化的动画。
+
+**android:fromId** 和 **android:toId**
+
+分别指定状态变化的起始和结束 item 的 id。详情请看示例。
+
+### 13.2 用法示例
+
+**定义**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visible="true"
+        android:dither="true">
+
+    <!--勾选状态-->
+    <item
+            android:id="@+id/checked"
+            android:drawable="@drawable/ic_checked"
+            android:state_checked="true" />
+
+    <!--未勾选状态-->
+    <item
+            android:id="@+id/unchecked"
+            android:drawable="@drawable/ic_unchecked" />
+
+    <!--未勾选状态过度到勾选状态-->
+    <transition
+            android:drawable="@drawable/toggle_unchecked_checked"
+            android:fromId="@id/unchecked"
+            android:toId="@id/checked" />
+
+    <!--勾选状态过度到未勾选状态-->
+    <transition
+            android:drawable="@drawable/toggle_checked_unchecked"
+            android:fromId="@id/checked"
+            android:toId="@id/unchecked" />
+
+</animated-selector>
+```
+
+正常状态到勾选状态过度动画：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:aapt="http://schemas.android.com/aapt"
+                 android:drawable="@drawable/ic_checked">
+
+    <!--打勾 path 动画-->
+    <target android:name="tick">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="200"
+                    android:interpolator="@android:interpolator/accelerate_cubic"
+                    android:propertyName="trimPathEnd"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+
+    <!--圆圈 path 动画-->
+    <target android:name="circle">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="500"
+                    android:interpolator="@android:interpolator/accelerate_decelerate"
+                    android:propertyName="strokeColor"
+                    android:valueFrom="#A0A0A0"
+                    android:valueTo="#1E9618"
+                    android:valueType="intType" />
+        </aapt:attr>
+    </target>
+</animated-vector>
+```
+
+勾选状态到未勾选状态过度动画：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:aapt="http://schemas.android.com/aapt"
+                 android:drawable="@drawable/ic_checked">
+
+    <!--打勾 path 动画-->
+    <target android:name="tick">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="100"
+                    android:interpolator="@android:interpolator/decelerate_cubic"
+                    android:propertyName="trimPathEnd"
+                    android:valueFrom="1"
+                    android:valueTo="0"
+                    android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+
+    <!--圆圈 path 动画-->
+    <target android:name="circle">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="500"
+                    android:interpolator="@android:interpolator/accelerate_decelerate"
+                    android:propertyName="strokeColor"
+                    android:valueFrom="#1E9618"
+                    android:valueTo="#A0A0A0"
+                    android:valueType="intType" />
+        </aapt:attr>
+    </target>
+</animated-vector>
+```
+
+**使用**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:button="@drawable/drawable_animated_state_list"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:text="I'm a CheckBox"
+            android:textColor="#ff00ff"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+**效果图**
+
+![](https://my-bucket-1251125515.cos.ap-guangzhou.myqcloud.com/Blog-Article/Android-Drawable-Use/animated-state-list-drawable.gif)
