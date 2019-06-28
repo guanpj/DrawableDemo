@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-selector
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visible="true"
+        android:dither="true"
+        android:autoMirrored="true"
+        android:enterFadeDuration="200"
+        android:exitFadeDuration="200">
 
     <item
             android:id="@+id/checked"
