@@ -6,7 +6,7 @@
     <target android:name="tick">
         <aapt:attr name="android:animation">
             <objectAnimator
-                    android:duration="@android:integer/config_shortAnimTime"
+                    android:duration="100"
                     android:interpolator="@android:interpolator/decelerate_cubic"
                     android:propertyName="trimPathEnd"
                     android:valueFrom="1"
@@ -18,7 +18,7 @@
     <target android:name="circle">
         <aapt:attr name="android:animation">
             <objectAnimator
-                    android:duration="@android:integer/config_shortAnimTime"
+                    android:duration="500"
                     android:interpolator="@android:interpolator/accelerate_decelerate"
                     android:propertyName="strokeColor"
                     android:valueFrom="#1E9618"
