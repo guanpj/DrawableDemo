@@ -15,8 +15,8 @@ class AnimatedImageDrawableActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animated_image_drawable)
-        image.setImageDrawable(resources.getDrawable(R.drawable.ic_arrow))
-        /*button.setOnClickListener {
+        //image.setImageDrawable(resources.getDrawable(R.drawable.ic_arrow))
+        button.setOnClickListener {
             ImageDecoder.createSource(resources, R.drawable.giphy).also { source ->
                 ImageDecoder.decodeDrawable(source).also { drawable ->
                     image.setImageDrawable(drawable)
@@ -25,6 +25,6 @@ class AnimatedImageDrawableActivity : AppCompatActivity() {
                     }
                 }
             }
-        }*/
+        }
     }
 }
