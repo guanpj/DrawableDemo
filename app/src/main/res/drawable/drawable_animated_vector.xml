@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt"
         android:drawable="@drawable/ic_arrow">
 
-    <target
-            android:name="left"
-            android:animation="@animator/anim_left"/>
+    <target android:name="left">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="1000"
+                    android:interpolator="@android:interpolator/anticipate_overshoot"
+                    android:propertyName="translateX"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0"
+                    android:valueTo="-10"
+                    android:valueType="floatType"/>
+        </aapt:attr>
+    </target>
 
-    <target
-            android:name="right"
-            android:animation="@animator/anim_right"/>
+    <target android:name="right">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="1000"
+                    android:interpolator="@android:interpolator/anticipate_overshoot"
+                    android:propertyName="translateX"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0"
+                    android:valueTo="10"
+                    android:valueType="floatType"/>
+        </aapt:attr>
+    </target>
 
 </animated-vector>
