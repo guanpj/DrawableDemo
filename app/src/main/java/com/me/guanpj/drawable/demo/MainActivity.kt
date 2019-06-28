@@ -57,5 +57,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_animated_vector_drawable).setOnClickListener {
             startActivity(Intent(MainActivity@this, AnimatedVectorDrawableActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_animated_state_list_drawable).setOnClickListener {
+            startActivity(Intent(MainActivity@this, AnimatedStateListDrawableActivity::class.java))
+        }
     }
 }
