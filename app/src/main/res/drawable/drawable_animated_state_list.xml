@@ -2,10 +2,7 @@
 <animated-selector
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:visible="true"
-        android:dither="true"
-        android:autoMirrored="true"
-        android:enterFadeDuration="200"
-        android:exitFadeDuration="200">
+        android:dither="true">
 
     <item
             android:id="@+id/checked"
@@ -23,7 +20,7 @@
 
     <transition
             android:drawable="@drawable/toggle_checked_unchecked"
-            android:fromId="@+id/checked"
-            android:toId="@+id/unchecked" />
+            android:fromId="@id/checked"
+            android:toId="@id/unchecked" />
 
 </animated-selector>
