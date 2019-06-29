@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(MainActivity@this, TransitionDrawableActivity::class.java))
         }
 
+        btn_ripple_drawable.setOnClickListener {
+            startActivity(Intent(MainActivity@this, RippleDrawableActivity::class.java))
+        }
+
         btn_vector_drawable.setOnClickListener {
             startActivity(Intent(MainActivity@this, VectorDrawableActivity::class.java))
         }
