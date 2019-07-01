@@ -5,115 +5,131 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-            android:text="BitmapDrawable"
-            android:layout_width="wrap_content"
+    <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_bitmap_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-    <Button
-            android:text="GradientDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_gradient_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_bitmap_drawable" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-            android:text="LayerDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_layer_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_gradient_drawable" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    <Button
-            android:text="StateListDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_state_list_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_layer_drawable" />
+            <Button
+                    android:text="BitmapDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_bitmap_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            <Button
+                    android:text="GradientDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_gradient_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_bitmap_drawable" />
 
-    <Button
-            android:text="LevelListDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_level_list_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_state_list_drawable" />
+            <Button
+                    android:text="LayerDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_layer_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_gradient_drawable" />
 
-    <Button
-            android:text="InsetDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_inset_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_level_list_drawable" />
+            <Button
+                    android:text="StateListDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_state_list_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_layer_drawable" />
 
-    <Button
-            android:text="ScaleDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_scale_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_inset_drawable" />
+            <Button
+                    android:text="LevelListDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_level_list_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_state_list_drawable" />
 
-    <Button
-            android:text="ClipDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_clip_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_scale_drawable" />
+            <Button
+                    android:text="InsetDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_inset_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_level_list_drawable" />
 
-    <Button
-            android:text="RotateDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_rotate_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_clip_drawable" />
+            <Button
+                    android:text="ScaleDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_scale_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_inset_drawable" />
 
-    <Button
-            android:text="TransitionDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_transition_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_rotate_drawable" />
+            <Button
+                    android:text="ClipDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_clip_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_scale_drawable" />
 
-    <Button
-            android:text="RippleDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_ripple_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_transition_drawable" />
+            <Button
+                    android:text="RotateDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_rotate_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_clip_drawable" />
 
-    <Button
-            android:text="VectorDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_vector_drawable" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_ripple_drawable" />
+            <Button
+                    android:text="TransitionDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_transition_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_rotate_drawable" />
 
-    <Button
-            android:text="AnimatedVectorDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_animated_vector_drawable"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_vector_drawable"
-            app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                    android:text="RippleDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_ripple_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_transition_drawable" />
 
-    <Button
-            android:text="AnimatedStateListDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_animated_state_list_drawable"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_animated_vector_drawable"
-            app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                    android:text="VectorDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_vector_drawable" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_ripple_drawable" />
 
-    <!--<Button
-            android:text="AnimatedImageDrawable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_animated_image_drawable"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_animated_state_list_drawable"
-            app:layout_constraintStart_toStartOf="parent" />-->
+            <Button
+                    android:text="AnimatedVectorDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_animated_vector_drawable"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_vector_drawable"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                    android:text="AnimatedStateListDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_animated_state_list_drawable"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_animated_vector_drawable"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                    android:text="AnimatedImageDrawable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_animated_image_drawable"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_animated_state_list_drawable"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
